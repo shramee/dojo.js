@@ -74,7 +74,7 @@ mod actions {
     fn encounter(world: IWorldDispatcher, player: u8, adversary: u8) -> bool {
         let adv_type = get!(world, adversary, (RPSType)).rps;
         let ply_type = get!(world, adversary, (RPSType)).rps;
-        if encounter_type(ply_type, adv_type) {
+        if encounter_win(ply_type, adv_type) {
             // adversary dies
             player_dead(world, adversary);
             true
@@ -85,7 +85,7 @@ mod actions {
         }
     }
 
-    fn encounter_type(ply_type: RPS, adv_type: RPS) -> bool {
+    fn encounter_win(ply_type: RPS, adv_type: RPS) -> bool {
         assert(adv_type != ply_type, 'occupied by same type');
         if (ply_type == RPS::Rock && adv_type == RPS::Scissors)
             || (ply_type == RPS::Paper && adv_type == RPS::Rock)
